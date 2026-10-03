@@ -1,0 +1,2764 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#160e09">
+
+<title>La Biblioteca de Liz ❤️</title>
+
+<style>
+
+/* =====================================================
+   BASE
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --wood-dark: #29170e;
+    --wood: #55311e;
+    --wood-light: #805034;
+
+    --gold: #d8b06c;
+
+    --paper: #ead9b8;
+    --paper-light: #f5e9d0;
+
+    --text: #3b2618;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    color: #f4e5ca;
+
+    background:
+        radial-gradient(
+            circle at 50% 10%,
+            rgba(125,78,44,.28),
+            transparent 45%
+        ),
+        linear-gradient(
+            180deg,
+            #24150e,
+            #100905
+        );
+}
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+#intro {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(110,70,40,.35),
+            transparent 45%
+        ),
+        #120a06;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+#intro.hidden {
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+.intro-content {
+    width: min(600px, 95vw);
+
+    animation:
+        introAppear 1.5s ease;
+}
+
+.intro-book {
+    font-size: 75px;
+
+    margin-bottom: 25px;
+
+    filter:
+        drop-shadow(
+            0 15px 20px rgba(0,0,0,.5)
+        );
+
+    animation:
+        floatingBook 3s ease-in-out infinite;
+}
+
+.intro-content h1 {
+    font-size:
+        clamp(2.5rem, 9vw, 5.5rem);
+
+    font-weight: normal;
+
+    color: #f0d39d;
+
+    margin-bottom: 15px;
+}
+
+.intro-content p {
+    color: #cdb493;
+
+    line-height: 1.8;
+
+    font-size: 1.1rem;
+
+    margin-bottom: 35px;
+}
+
+.enter-button {
+    border:
+        1px solid var(--gold);
+
+    background:
+        rgba(216,176,108,.08);
+
+    color: #f4dcae;
+
+    padding:
+        15px 32px;
+
+    border-radius:
+        50px;
+
+    font-family: inherit;
+
+    font-size: 1rem;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.enter-button:hover {
+    transform:
+        translateY(-3px);
+
+    background:
+        var(--gold);
+
+    color:
+        #24150e;
+}
+
+
+/* =====================================================
+   BIBLIOTECA
+===================================================== */
+
+.library {
+    min-height: 100vh;
+
+    padding:
+        50px 20px 120px;
+}
+
+.library-header {
+    text-align: center;
+
+    margin-bottom: 55px;
+}
+
+.library-header h1 {
+    font-size:
+        clamp(2.3rem, 8vw, 5rem);
+
+    font-weight: normal;
+
+    color: #efd29b;
+
+    text-shadow:
+        0 4px 20px rgba(0,0,0,.6);
+}
+
+.library-header p {
+    color: #c4a98c;
+
+    margin-top: 12px;
+
+    font-style: italic;
+}
+
+
+/* =====================================================
+   HABITACIÓN
+===================================================== */
+
+.library-room {
+    width:
+        min(1200px, 96vw);
+
+    margin:
+        auto;
+
+    padding:
+        35px 25px 45px;
+
+    position:
+        relative;
+
+    border-radius:
+        8px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.4),
+            transparent 20%,
+            transparent 80%,
+            rgba(0,0,0,.4)
+        ),
+        linear-gradient(
+            180deg,
+            #362014,
+            #1e120c
+        );
+
+    box-shadow:
+        inset 0 0 50px rgba(0,0,0,.55),
+        0 30px 80px rgba(0,0,0,.5);
+
+    border:
+        8px solid #3b2114;
+}
+
+
+/* =====================================================
+   ESTANTES
+===================================================== */
+
+.shelf {
+    position:
+        relative;
+
+    margin-bottom:
+        55px;
+
+    padding:
+        20px 14px 0;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(10, minmax(0,1fr));
+
+    align-items:
+        end;
+
+    gap:
+        7px;
+
+    min-height:
+        285px;
+
+    border-bottom:
+        20px solid var(--wood-light);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.25),
+            transparent 20%,
+            transparent 80%,
+            rgba(0,0,0,.25)
+        );
+
+    box-shadow:
+        0 13px 0 var(--wood-dark),
+        inset 0 -25px 30px rgba(0,0,0,.3);
+}
+
+.shelf::after {
+    content: "";
+
+    position:
+        absolute;
+
+    left:
+        -12px;
+
+    right:
+        -12px;
+
+    bottom:
+        -30px;
+
+    height:
+        10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2d190e,
+            #71462b,
+            #3a2114
+        );
+
+    box-shadow:
+        0 5px 8px rgba(0,0,0,.5);
+}
+
+
+/* =====================================================
+   LIBROS
+===================================================== */
+
+.book {
+    --book-color:
+        #6e3d3d;
+
+    position:
+        relative;
+
+    height:
+        225px;
+
+    border-radius:
+        3px 7px 7px 3px;
+
+    cursor:
+        pointer;
+
+    transform-origin:
+        bottom center;
+
+    box-shadow:
+        5px 8px 12px rgba(0,0,0,.55),
+        inset -8px 0 rgba(0,0,0,.18),
+        inset 3px 0 rgba(255,255,255,.1);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.1),
+            transparent 15%,
+            rgba(0,0,0,.15)
+        ),
+        var(--book-color);
+
+    transition:
+        transform .35s ease,
+        filter .35s ease,
+        opacity .35s ease;
+}
+
+.book:hover {
+    transform:
+        translateY(-16px)
+        rotate(-2deg);
+
+    filter:
+        brightness(1.18);
+
+    z-index:
+        10;
+}
+
+.book::before {
+    content: "";
+
+    position:
+        absolute;
+
+    left:
+        7px;
+
+    top:
+        0;
+
+    bottom:
+        0;
+
+    width:
+        3px;
+
+    background:
+        rgba(255,255,255,.2);
+}
+
+.book::after {
+    content: "";
+
+    position:
+        absolute;
+
+    left:
+        15%;
+
+    right:
+        15%;
+
+    top:
+        15px;
+
+    height:
+        3px;
+
+    background:
+        rgba(255,255,255,.2);
+
+    box-shadow:
+        0 190px
+        rgba(255,255,255,.12);
+}
+
+.book-spine {
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    writing-mode:
+        vertical-rl;
+
+    transform:
+        rotate(180deg);
+
+    padding:
+        12px 4px;
+
+    color:
+        #f7e5c2;
+
+    font-size:
+        .88rem;
+
+    letter-spacing:
+        1px;
+
+    text-shadow:
+        0 2px 4px rgba(0,0,0,.5);
+
+    overflow:
+        hidden;
+}
+
+.book-number {
+    position:
+        absolute;
+
+    top:
+        8px;
+
+    right:
+        7px;
+
+    color:
+        rgba(255,255,255,.6);
+
+    font-size:
+        .65rem;
+}
+
+
+/* =====================================================
+   COLORES DE LOS LIBROS
+===================================================== */
+
+.book:nth-child(1)  { --book-color:#7a3038; }
+.book:nth-child(2)  { --book-color:#34566b; }
+.book:nth-child(3)  { --book-color:#76502f; }
+.book:nth-child(4)  { --book-color:#604474; }
+.book:nth-child(5)  { --book-color:#356153; }
+.book:nth-child(6)  { --book-color:#8b5030; }
+.book:nth-child(7)  { --book-color:#754866; }
+.book:nth-child(8)  { --book-color:#405d78; }
+.book:nth-child(9)  { --book-color:#826b36; }
+.book:nth-child(10) { --book-color:#663c39; }
+.book:nth-child(11) { --book-color:#3e5d53; }
+.book:nth-child(12) { --book-color:#72472e; }
+.book:nth-child(13) { --book-color:#4b5279; }
+.book:nth-child(14) { --book-color:#754967; }
+.book:nth-child(15) { --book-color:#3d654d; }
+.book:nth-child(16) { --book-color:#8a6039; }
+.book:nth-child(17) { --book-color:#475b7c; }
+.book:nth-child(18) { --book-color:#6e3e4b; }
+.book:nth-child(19) { --book-color:#806037; }
+.book:nth-child(20) { --book-color:#8b3042; }
+
+
+/* =====================================================
+   ANIMACIÓN DEL LIBRO
+===================================================== */
+
+/*
+   Cuando se selecciona:
+
+   1. Sale del estante.
+   2. Se hace grande.
+   3. Se acerca a la pantalla.
+   4. Gira.
+*/
+
+.book.book-selected {
+    z-index:
+        5000;
+
+    animation:
+        bookLeavesShelf
+        1.4s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
+}
+
+@keyframes bookLeavesShelf {
+
+    0% {
+
+        transform:
+            translate3d(
+                0,
+                0,
+                0
+            )
+            rotate(0deg)
+            scale(1);
+
+        opacity:
+            1;
+    }
+
+    30% {
+
+        transform:
+            translate3d(
+                0,
+                -70px,
+                80px
+            )
+            rotate(-5deg)
+            scale(1.08);
+
+        opacity:
+            1;
+    }
+
+    65% {
+
+        transform:
+            translate3d(
+                0,
+                -180px,
+                250px
+            )
+            rotate(7deg)
+            scale(1.35);
+
+        opacity:
+            1;
+    }
+
+    100% {
+
+        transform:
+            translate3d(
+                0,
+                -50vh,
+                500px
+            )
+            rotateY(180deg)
+            rotateZ(-3deg)
+            scale(2);
+
+        opacity:
+            0;
+    }
+}
+
+
+/*
+   Los demás libros se oscurecen
+   ligeramente durante la animación.
+*/
+
+.shelf.animating .book:not(.book-selected) {
+    filter:
+        brightness(.55);
+
+    transition:
+        filter .4s ease;
+}
+
+
+/* =====================================================
+   REPRODUCTOR
+===================================================== */
+
+.music-player {
+    position:
+        fixed;
+
+    right:
+        18px;
+
+    bottom:
+        18px;
+
+    z-index:
+        8000;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        9px;
+
+    padding:
+        7px 9px;
+
+    border:
+        1px solid rgba(216,176,108,.35);
+
+    border-radius:
+        50px;
+
+    background:
+        rgba(22,13,8,.9);
+
+    backdrop-filter:
+        blur(12px);
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.5);
+}
+
+.music-button {
+    width:
+        43px;
+
+    height:
+        43px;
+
+    border:
+        none;
+
+    border-radius:
+        50%;
+
+    background:
+        var(--gold);
+
+    color:
+        #26160e;
+
+    cursor:
+        pointer;
+
+    font-size:
+        17px;
+}
+
+.volume {
+    width:
+        75px;
+
+    accent-color:
+        var(--gold);
+}
+
+.song-name {
+    max-width:
+        150px;
+
+    color:
+        #d9c19d;
+
+    font-size:
+        .75rem;
+
+    white-space:
+        nowrap;
+
+    overflow:
+        hidden;
+
+    text-overflow:
+        ellipsis;
+}
+
+
+/* =====================================================
+   LECTOR
+===================================================== */
+
+.reader {
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        6000;
+
+    display:
+        none;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        18px;
+
+    background:
+        rgba(7,4,2,.95);
+
+    backdrop-filter:
+        blur(15px);
+
+    opacity:
+        0;
+}
+
+.reader.active {
+
+    display:
+        flex;
+
+    animation:
+        readerAppear
+        .5s
+        ease
+        forwards;
+}
+
+.book-display {
+
+    width:
+        min(980px,96vw);
+
+    max-height:
+        92vh;
+
+    position:
+        relative;
+
+    perspective:
+        1800px;
+}
+
+.reader-close {
+
+    position:
+        absolute;
+
+    top:
+        -12px;
+
+    right:
+        -12px;
+
+    z-index:
+        20;
+
+    width:
+        40px;
+
+    height:
+        40px;
+
+    border:
+        none;
+
+    border-radius:
+        50%;
+
+    background:
+        #ead4ad;
+
+    color:
+        #3c2517;
+
+    cursor:
+        pointer;
+
+    font-size:
+        18px;
+}
+
+
+/* =====================================================
+   PORTADA
+===================================================== */
+
+.cover {
+
+    min-height:
+        650px;
+
+    border-radius:
+        5px 10px 10px 5px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    text-align:
+        center;
+
+    padding:
+        50px 30px;
+
+    overflow:
+        hidden;
+
+    position:
+        relative;
+
+    color:
+        white;
+
+    background-size:
+        cover;
+
+    background-position:
+        center;
+
+    box-shadow:
+        20px 25px 60px rgba(0,0,0,.7);
+
+    animation:
+        coverOpen
+        .9s
+        cubic-bezier(.2,.8,.2,1);
+}
+
+.cover::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,.3),
+            rgba(0,0,0,.7)
+        );
+}
+
+.cover-content {
+
+    position:
+        relative;
+
+    z-index:
+        2;
+}
+
+.cover h2 {
+
+    font-size:
+        clamp(2.3rem,8vw,5rem);
+
+    font-weight:
+        normal;
+
+    text-shadow:
+        0 4px 15px #000;
+}
+
+.cover p {
+
+    margin-top:
+        18px;
+
+    font-style:
+        italic;
+
+    font-size:
+        1.1rem;
+
+    text-shadow:
+        0 2px 7px #000;
+}
+
+.open-book-button {
+
+    margin-top:
+        45px;
+
+    padding:
+        13px 28px;
+
+    border:
+        1px solid rgba(255,255,255,.7);
+
+    border-radius:
+        30px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    color:
+        white;
+
+    cursor:
+        pointer;
+
+    backdrop-filter:
+        blur(5px);
+
+    transition:
+        .3s;
+}
+
+.open-book-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    background:
+        rgba(255,255,255,.2);
+}
+
+
+/* =====================================================
+   PÁGINAS
+===================================================== */
+
+.page {
+
+    min-height:
+        650px;
+
+    position:
+        relative;
+
+    padding:
+        70px clamp(25px,8vw,100px);
+
+    color:
+        var(--text);
+
+    background:
+        repeating-linear-gradient(
+            transparent 0,
+            transparent 31px,
+            rgba(90,60,35,.08) 32px
+        ),
+        var(--paper);
+
+    border-radius:
+        4px 10px 10px 4px;
+
+    box-shadow:
+        20px 25px 60px rgba(0,0,0,.65);
+
+    overflow:
+        hidden;
+
+    animation:
+        pageTurn
+        .65s
+        ease;
+}
+
+.page::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        45px;
+
+    top:
+        0;
+
+    bottom:
+        0;
+
+    width:
+        1px;
+
+    background:
+        rgba(170,70,70,.25);
+}
+
+.page h3 {
+
+    font-size:
+        clamp(1.8rem,5vw,3rem);
+
+    font-weight:
+        normal;
+
+    margin-bottom:
+        30px;
+
+    color:
+        #65432c;
+}
+
+.page-text {
+
+    font-size:
+        clamp(1rem,2vw,1.25rem);
+
+    line-height:
+        2;
+
+    white-space:
+        pre-line;
+}
+
+.page-number {
+
+    position:
+        absolute;
+
+    bottom:
+        25px;
+
+    left:
+        50%;
+
+    transform:
+        translateX(-50%);
+
+    color:
+        #80664b;
+
+    font-style:
+        italic;
+}
+
+.page-controls {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    bottom:
+        55px;
+
+    transform:
+        translateX(-50%);
+
+    display:
+        flex;
+
+    gap:
+        10px;
+}
+
+.page-controls button {
+
+    border:
+        1px solid #a58a6a;
+
+    background:
+        rgba(255,255,255,.65);
+
+    color:
+        #4a2e1c;
+
+    padding:
+        10px 18px;
+
+    border-radius:
+        25px;
+
+    cursor:
+        pointer;
+
+    font-family:
+        inherit;
+}
+
+
+/* =====================================================
+   ANIMACIONES DEL LECTOR
+===================================================== */
+
+@keyframes readerAppear {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes coverOpen {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            rotateY(-25deg)
+            scale(.9);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            rotateY(0)
+            scale(1);
+    }
+}
+
+@keyframes pageTurn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            rotateY(-20deg)
+            translateX(-25px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            rotateY(0)
+            translateX(0);
+    }
+}
+
+@keyframes introAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+@keyframes floatingBook {
+
+    0%,100% {
+
+        transform:
+            translateY(0)
+            rotate(-2deg);
+    }
+
+    50% {
+
+        transform:
+            translateY(-12px)
+            rotate(2deg);
+    }
+}
+
+
+/* =====================================================
+   CELULAR
+===================================================== */
+
+@media(max-width:850px) {
+
+    .shelf {
+
+        grid-template-columns:
+            repeat(5,1fr);
+
+        min-height:
+            220px;
+    }
+
+    .book {
+
+        height:
+            175px;
+    }
+
+    .book-spine {
+
+        font-size:
+            .65rem;
+    }
+
+    .library-room {
+
+        padding:
+            25px 10px 35px;
+    }
+}
+
+@media(max-width:600px) {
+
+    .library {
+
+        padding:
+            35px 10px 100px;
+    }
+
+    .library-room {
+
+        width:
+            100%;
+
+        border-width:
+            5px;
+
+        padding:
+            20px 7px 30px;
+    }
+
+    .shelf {
+
+        gap:
+            4px;
+
+        padding:
+            15px 6px 0;
+
+        min-height:
+            185px;
+
+        border-bottom-width:
+            14px;
+    }
+
+    .book {
+
+        height:
+            145px;
+    }
+
+    .book-spine {
+
+        font-size:
+            .55rem;
+    }
+
+    .book-number {
+
+        font-size:
+            .5rem;
+
+        top:
+            5px;
+
+        right:
+            4px;
+    }
+
+    .cover,
+    .page {
+
+        min-height:
+            78vh;
+    }
+
+    .page {
+
+        padding:
+            55px 35px 120px;
+    }
+
+    .page::before {
+
+        left:
+            22px;
+    }
+
+    .page-text {
+
+        line-height:
+            1.8;
+    }
+
+    .music-player {
+
+        right:
+            10px;
+
+        bottom:
+            10px;
+    }
+
+    .song-name {
+
+        display:
+            none;
+    }
+
+    .volume {
+
+        width:
+            60px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
+<section id="intro">
+
+    <div class="intro-content">
+
+        <div class="intro-book">
+            📖
+        </div>
+
+        <h1>
+            Para Liz
+        </h1>
+
+        <p>
+            Hay historias que merecen ser leídas...
+            <br>
+            y otras que merecen ser guardadas.
+        </p>
+
+        <button
+            class="enter-button"
+            onclick="enterLibrary()"
+        >
+            Abrir la biblioteca ❤️
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     BIBLIOTECA
+===================================================== -->
+
+<main class="library">
+
+    <header class="library-header">
+
+        <h1>
+            La Biblioteca de Liz
+        </h1>
+
+        <p>
+            Veinte libros. Una historia. Y muchas cosas que quiero decirte.
+        </p>
+
+    </header>
+
+
+    <section class="library-room">
+
+        <div
+            class="shelf"
+            id="shelf"
+        ></div>
+
+        <div
+            class="shelf"
+            id="shelf2"
+        ></div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     MÚSICA
+===================================================== -->
+
+<div class="music-player">
+
+    <span
+        class="song-name"
+        id="songName"
+    >
+        Biblioteca
+    </span>
+
+    <button
+        class="music-button"
+        id="musicButton"
+        onclick="toggleMusic()"
+    >
+        ▶
+    </button>
+
+    <input
+        class="volume"
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        value="0.35"
+        oninput="changeVolume(this.value)"
+    >
+
+</div>
+
+
+<audio
+    id="audio"
+    preload="auto"
+></audio>
+
+
+<!-- =====================================================
+     LECTOR
+===================================================== -->
+
+<section
+    class="reader"
+    id="reader"
+>
+
+    <div class="book-display">
+
+        <button
+            class="reader-close"
+            onclick="closeBook()"
+        >
+            ✕
+        </button>
+
+        <div
+            id="bookContent"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+
+/* =====================================================
+   🎵 CANCIONES
+===================================================== */
+
+const canciones = {
+
+    bienvenida:
+        "PEGA_AQUI_URL_DE_BIENVENIDA",
+
+    libro01:
+        "https://cdn.imageurlgenerator.com/uploads/0b40f5e2-b729-45ba-ade4-8238f2d5aee9.mp3",
+
+    libro02:
+        "https://cdn.imageurlgenerator.com/uploads/5bcbf939-d82a-4af0-82b3-34eff01b1d2f.mp3",
+
+    libro03:
+        "https://cdn.imageurlgenerator.com/uploads/60a04085-ad71-41c7-a4e8-2dcff00ddb9d.mp3",
+
+    libro04:
+        "https://cdn.imageurlgenerator.com/uploads/be44ea1f-2caf-400f-9a5d-dfc79b81d715.mp3",
+
+    libro05:
+        "https://cdn.imageurlgenerator.com/uploads/6cb86f83-ecd1-4e2d-956b-bd731d0f3c62.mp3",
+
+    libro06:
+        "https://cdn.imageurlgenerator.com/uploads/58d7de31-39c4-4975-9db1-1ec83e521bed.mp3",
+
+    libro07:
+        "https://cdn.imageurlgenerator.com/uploads/dcd034d6-22e7-4a87-9237-db78085b6e61.mp3",
+
+    libro08:
+        "https://cdn.imageurlgenerator.com/uploads/22f9f03f-9fba-43b2-ab57-37d766867587.mp3",
+
+    libro09:
+        "https://cdn.imageurlgenerator.com/uploads/d3b1934f-c911-4eb5-b098-feecb88535c4.mp3",
+
+    libro10:
+        "https://cdn.imageurlgenerator.com/uploads/3d116c8f-35b5-4810-b902-57d8b8a93f0f.mp3",
+
+    libro11:
+        "https://cdn.imageurlgenerator.com/uploads/450edaa5-989c-4ba6-9343-4cfa9792a476.mp3",
+
+    libro12:
+        "https://cdn.imageurlgenerator.com/uploads/df2afbfd-6121-4400-a28a-a4b8b07ad5f9.mp3",
+
+    libro13:
+        "https://cdn.imageurlgenerator.com/uploads/f8d4a73d-2c38-41f8-8558-1f8db7aa2d9c.mp3",
+
+    libro14:
+        "https://cdn.imageurlgenerator.com/uploads/5edef9b0-36d6-4b48-8764-5bddc48d77c6.mp3",
+
+    libro15:
+        "https://cdn.imageurlgenerator.com/uploads/8373712d-6128-413b-9e3e-a2ef66dc63ea.mp3",
+
+    libro16:
+        "https://cdn.imageurlgenerator.com/uploads/1ccb803d-04f5-467a-a5b3-16f11a2b311d.mp3",
+
+    libro17:
+        "https://cdn.imageurlgenerator.com/uploads/5436a83e-e201-447e-959d-dd4d6f03db82.mp3",
+
+    libro18:
+        "https://cdn.imageurlgenerator.com/uploads/0bde837c-d37b-4c09-92b6-4b6099dba05e.mp3",
+
+    libro19:
+        "https://cdn.imageurlgenerator.com/uploads/3e72cdd4-d918-4207-bd78-dba079c03d22.mp3",
+
+    libro20:
+        "https://cdn.imageurlgenerator.com/uploads/4ca70c2a-7708-464c-a21f-b31a71ca11b9.mp3"
+};
+
+
+/* =====================================================
+   🖼️ PORTADAS
+===================================================== */
+
+const portadas = {
+
+    libro01: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2RppculAkmIiIuUWqveaV7vnnnUg2KugwoZIhNZytl5mJS3tg3_r4Puk&s=10",
+    libro02: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFU_1IRa3ouoo3NZtoAUo2iHFBZn-4trGs-DhqG7w6fg&s=10",
+    libro03: "https://cdn.phototourl.com/member/2026-10-03-240004d9-3ead-4af4-bac1-cc7a6fba8a81.jpg",
+    libro04: "https://cdn.phototourl.com/member/2026-10-03-f18103f9-1db7-4d64-87a3-a1e16a6ecb1b.jpg",
+    libro05: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBwwY07fCtyYuulrfJGwZdPFEbSInaxHdt-S_CTuspGQ&s=10",
+    libro06: "https://www.autovias.com.mx/blog/wp-content/uploads/2025/07/dia-no-rendirse-nunca.webp",
+    libro07: "https://i.pinimg.com/736x/34/75/00/347500465ae8ab873424e77c2463fa16.jpg",
+    libro08: "https://embroideres.com/files/6916/0962/3623/Spiderman_love_embroidery_design.jpg",
+    libro09: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuqlRV8dijJVS-hIQKbQJXL40TH4HQJ350NufeViye4lU90YhyRHer_hI&s=10",
+    libro10: "https://cdn.phototourl.com/member/2026-10-03-94165fc5-603f-4b02-9c8b-03b3245b748b.jpg",
+    libro11: "https://cdn.phototourl.com/member/2026-10-03-e1b80df5-3c34-4722-8634-c41354f24108.jpg",
+    libro12: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3cU4eCCwNSjRaWfxaPxmV1s0Z9GZvvJO2QGU7_yX6LA&s=10",
+    libro13: "https://ih1.redbubble.net/image.5374848610.8190/st,small,507x507-pad,600x600,f8f8f8.jpg",
+    libro14: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJd7_DncPeEca_g3_ln4w-H1fT6CIrodE1OwzmyG6gfQ&s=10",
+    libro15: "https://cdn.phototourl.com/member/2026-10-03-339a15e7-1290-4f26-8aff-2330bcc671f7.png",
+    libro16: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyVaoSZXp90DJoeujpTuNkgkWjfJyPSLA9tOV41jClJFkEpFWex33VnbI&s=10",
+    libro17: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxRZRakou38n-Zg4u25_hyUdrzF2eKm9MQfySct7iEhg&s",
+    libro18: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzJcItrTHoQhtm2t7WsUtRd8Qlb2SEjO21291kZ3fq4taqdMx-8JYS8l3V&s=10",
+    libro19: "https://static.bainet.es/clip/a4cbe192-7e83-4b66-a2ed-7e65011fa4b7_source-aspect-ratio_1600w_0.jpg",
+    libro20: "https://i.pinimg.com/originals/96/b3/f6/96b3f688e075484be197044ee58fdfa9.jpg"
+};
+
+
+/* =====================================================
+   📚 LIBROS
+===================================================== */
+
+const libros = [
+
+{
+titulo:"Yo por ti",
+subtitulo:"Por que?",
+paginas:[
+{
+titulo:"Página I",
+texto:`Quien diria que día a día solo te veria .
+en mis sueños, pensamientos creo fue un encantamiento 
+y ahora no te saco de mis pensamientos, no lo puedo explicar 
+creo que es solo locura que no quiero acabe nunca
+mi amor no es de caer puede durar 
+y mi amor es de arder `
+},
+{
+titulo:" II",
+texto:`Ahora sirvo pa quererte a ti 
+y que mas da si no me quieres a mi
+yo dejaria el alma por no dejarte ir, por verte sonerir 
+y ahora no se que voy a hacer
+solo pienso en ser mejor persona 
+de ser la mejor opción de todas .`
+},
+{
+titulo:" III",
+texto:`Eligiria vover a conocerte, elegiria todo por ti
+solo puedo decir que te quiero
+y no lo puedo negar 
+me tienes a voluntad. ❤️`
+}
+]
+},
+
+{
+titulo:"Lo que siento y pienso",
+subtitulo:"Mi persona favorita",
+paginas:[
+{
+titulo:"Página I",
+texto:`Cada que dicen tu nombre no puedo dejar de sonreir 
+tu sonrisa me tiene cautivo en un un pensamiento infinito 
+cada recuerdo es mejor que el anterior
+pensar que de frente puedo estar los nervios no pueden más
+podria ser cualquier tipo tu dime quien quieres que sea, puedo aprender 
+a amarte mas de lo que crees .`
+},
+{
+titulo:"Página II",
+texto:`No sé si tú notas lo mucho que cambia un momento cuando sonríes.
+pero deberias, puedes iluminar ciudades con ella 
+hacer el mas depresivo, feliz o el mas solitario un romantico 
+no lo se 
+tu puedes hacer que las perosnas cambien a tu al rededor
+y eso es una de tus muchas virtudes .`
+},
+{
+titulo:"Página III",
+texto:`eres hermosa lizbeth, 
+entiendo por que todos te quieren hablar 
+pero mas que eso 
+yo te quiero abrazar y estar viendo tus mejores momentos 
+y todos tus talentos.`
+}
+]
+},
+
+{
+titulo:"Nada mas importa",
+subtitulo:"Sabes como se siente esto?",
+paginas:[
+{
+titulo:"Página I",
+texto:`Como te lo puedo explicar, es como si de nuevo
+me enamorara por primera vez, solo sigo mis pasos 
+mis pensamientos dicen:
+En el omento en que te vea se que estare a tu lado`
+},
+{
+titulo:"Página II",
+texto:`Tengo que entender que todo lleva un tiempo 
+que tal vez ya no haya nada de por medio 
+pero encontrare una excusa cualquier motivo 
+para hacerte mia
+abre tus ojos puedo ser lo que necesitas.`
+},
+{
+titulo:"Página III",
+texto:`y si no lo soy solo puedo decirte que 
+nada importa cuando estas conmigo 
+olvida los problemas, el pasado
+el mundo se detiene cuando estoy a tu lado
+me gusta conocerte.`
+}
+]
+},
+
+{
+titulo:"Tus ojos",
+subtitulo:"the map",
+paginas:[
+{
+titulo:"Página I",
+texto:`Puedes ver mis ojos?
+yo veo los tuyos en ellos estan el mapa par encotrarte, para encontrarme 
+me dejas paralizado cuando me miras 
+sonriendo cuando nos vemos 
+miles de sentimientos en esos ojos cafés 
+puede ser demasiado inquietante o demasiado tranquilizante 
+ese es el poder que tienes con ellos.`
+},
+{
+titulo:"Página II",
+texto:`Ahora puedes verlo?
+muestran mis sentimientos, lo mas profundo de mi ser 
+una galaxia diferente cada ez que los aprecio
+brillantes como diamantes 
+despertadores como el café.`
+},
+{
+titulo:"Página III",
+texto:`Cada vez que los veo me quedo hipnotizado 
+atontado, cegado por la ternura la belleza de esos ojos 
+que no puedo ver 
+pero me hacen recorar 
+lo marivillosa que eres.`
+}
+]
+},
+
+{
+titulo:"Voice",
+subtitulo:"Una melodia diferente",
+paginas:[
+{
+titulo:"Página I",
+texto:`Tu voz es algo que no puedo explicar 
+pero puedo sentir, me da calma como no tienes idea 
+es una melodia compuesta para tranquilizar 
+para escuchar y ponerte atención.`
+},
+{
+titulo:"Página II",
+texto:`Cada que dices algo se me queda grabado 
+aun el mas pequeño detalle esta en mi mente
+tu risa y cada historia que me contaste siguen ahi
+es como si yo fuera la grabadora que repite tu voz cada que puede.`
+},
+{
+titulo:"Página III",
+texto:`Seamos sinceros si podria reocordar tu voz siempre
+no me importa escucharla una y otra vez 
+siempre me hace sentir que todo esta bien 
+esa voz es mi ancla en lo dificil, gracias por comparirla conmigo`
+}
+]
+},
+
+{
+titulo:"Camino",
+subtitulo:"Lo que pasa",
+paginas:[
+{
+titulo:"Página I",
+texto:`Liz nunca te des por vencida habra dias buenos como malos 
+si piensas que no puedes grita, pero se que no lo dejaras asi 
+terminaras aprendiendo de mas 
+tu fuerza es mas que la de los demás 
+es tu voluntad .`
+},
+{
+titulo:"Página II",
+texto:`Puedes sentarte y reflexionar 
+el tiempo no se detendra, pero recuerda eres humana 
+necesitas descansar estar al 100 
+has demostrado mas de lo que piensas 
+has callado bocas y estas haciendo historia.`
+},
+{
+titulo:"Página III",
+texto:`Detente cuando creas que es suficiente 
+o no pares hasta que el mundo se vea chico para ti 
+siempre seras mi estudiante favorita y la persona a la que se 
+que vere triunfar mas allá de lo normal.`
+}
+]
+},
+
+{
+titulo:"Cuando necesites un consejo",
+subtitulo:"Algo difícil de explicar",
+paginas:[
+{
+titulo:"Página I",
+texto:`El dolor del pasaso no se puede borrar 
+tienes que perdonarte, vivimos por un breve momento y luego volvemos al viento eterno
+
+El destino es extraño, si mantienes tu mente y tu corazón abiertos, lo encontraras algun día
+
+Aún cuando te desvies encontraras el camino a casa.`
+},
+{
+titulo:"Página II",
+texto:`A veces solo quiero escucharte hablar 
+saber tu dia, reirnos de cualquier tonteria o compartir el silencio 
+nunca se trato de decir algo importante 
+se trato de que seas tu con quien quiero hablar.`
+},
+{
+titulo:"Página III",
+texto:`Que no te importe lo que piensen lo demás 
+puedes romper un ciclo si es de tu comodiad 
+algunos le diran rebeldia yo lo llamo 
+libertad 
+cambia tu mundo rompiendo ciclos liz.`
+}
+]
+},
+
+{
+titulo:"Lo que me haces sentir",
+subtitulo:"Palabras que no siempre digo",
+paginas:[
+{
+titulo:"Página I",
+texto:`El amor no debe ser secreto, por eso siempre te lo digo 
+o te lo intento demostrar a mi manera 
+no se si funcione pero no me arrepiento de decirtelo cuando puedo 
+un te quiero o un te amo 
+puedo decirlo sin pena por el amor que te tengo.`
+},
+{
+titulo:"Página II",
+texto:`Hay tanto que decir que nunca se por donde empezar 
+las trabas que hay no me impediran estar a tu lado algún dia 
+quiero que sepas que siempre estare dispuesto a ayudarte 
+y hare todo lo posible para cuidarte.`
+},
+{
+titulo:"Página III",
+texto:`Lo mejor de ti es que cuando te veo a los ojos y tu me vez a mi 
+siento que mi mundo ya no es tan normal 
+te sientes mas fuerte y debil al mismo tiempo
+te sientes aterrado y al mismo tiempo emocionado 
+la verdad no estoy seguro de lo que siento excepto 
+que clase de hombre quiero ser, siento alcanzo lo inalcanzable.`
+}
+]
+},
+
+{
+titulo:"Galaxia",
+subtitulo:"Fuera del mundo",
+paginas:[
+{
+titulo:"Página I",
+texto:`Quiero decirte que quiero llevarte 
+donde no nos puedan encontrar lugares que podamos explorar 
+dias que no puedas olvidar 
+se que no es de extrañar pero llendo de lugar a lugar 
+conociendo lo que pocos sabran.`
+},
+{
+titulo:"Página II",
+texto:`Ven conmigo no tengas miedo tu y yo 
+perdamonos por toda la ciudad 
+viajemos juntos tu tranquila solo somos tu y yo 
+ninguno se hara diminuto 
+creemos una nueva historia donde todo sea posible .`
+},
+{
+titulo:"Página III",
+texto:`Cada parte de ti lo amo 
+no puedo negar que me atraes 
+com olos anillos a saturno no se por que quiero volver a ti 
+me hiciste un amaorre tal vez 
+o solamente es que debes ser tu.`
+}
+]
+},
+
+{
+titulo:"Never",
+subtitulo:"LOVING YOU",
+paginas:[
+{
+titulo:"Página I",
+texto:`Las estrellas te quiero bajar,
+darte el mundo la luna o el universo si se puede dar 
+solo quiero que sepas que tanto que te puedo amar 
+solo de tu ano quiero tomar y que no me sueltes nunca mas
+y si tengo que bajar para verte subir 
+lo haria hasta que llegues a triunfar .`
+},
+{
+titulo:"Página II",
+texto:`Yo solo siento cada palabra que de esa voz 
+bien entonada trayendome de un lado a otro 
+haciendome sentir como si el mundo fuera mio 
+no debo busar nada mas en la mujer a la quiero con mi ser.`
+},
+{
+titulo:"Página III",
+texto:`Gracias simplemente por ser parte de mi historia.`
+}
+]
+},
+
+{
+titulo:"Días",
+subtitulo:"You stronger",
+paginas:[
+{
+titulo:"Página I",
+texto:`Se lo mucho que te esfuerzas cada dia 
+inlcuso cuando nadie lo ve, no puedo expresar 
+lo bien que se siente que hagas de todo 
+y que tengas esa mentalidad ee si se puede 
+.`
+},
+{
+titulo:"Página II",
+texto:`Jamás olvides de todo lo que has echo para llegar hasta aqui 
+no hay ni un solo detalle de ti que no valga la pena y que no supere 
+quien fuiste y quien eres ahora .`
+},
+{
+titulo:"Página III",
+texto:`Sigue siendo tu, autentica, lista, fuerte
+no hay nada que te quede gande liz 
+y recuerda que tu siempre seras capaz 
+sufciente, efervecente jaja 
+siempre seras la numero uno y yo tu fan .`
+}
+]
+},
+
+{
+titulo:"Canasta al aro",
+subtitulo:"And one",
+paginas:[
+{
+titulo:"Página I",
+texto:`Una vez alguien dijo que uno debe superarse a si muismo una y otra vez 
+sin ser conformista 
+eso es lo que yo pienso y veo en ti cada vez que me cuentas sobre tu trabajo o la esucela 
+o la ayuda tus hermanas 
+veo a una liz que sabe que puede hacer mas 
+y que lo hace .`
+},
+{
+titulo:"Página II",
+texto:`No te limitas a un tal vez 
+vas a tus limites hasta que puedas quedar cansada 
+y terminar dormida peri con la sastifación de que lo hiciste 
+y no te quedaste con las ganas 
+eso es algo que de verdad es de admirarse.`
+},
+{
+titulo:"Página III",
+texto:`y podria seguir por que sabes adaptarte a tu entoro 
+rodearte con mas personas y esas personas 
+te van a querer por que tienes un gran carisma 
+no sabeslo mucho que me alegra verte parar 
+cada dia aunque no quieras te adiro liz.`
+}
+]
+},
+
+{
+titulo:"Todo sobre ti fuaa",
+subtitulo:"Palabras infinitas",
+paginas:[
+{
+titulo:"Página I",
+texto:`Te eh dicho hasta ahora por que me encantas 
+que es lo que me gusta de ti 
+y si te soy sincero quiero que sepas que todo lo digo del corazón 
+no se que es lo que pasa cuando te pienso 
+pero me generas una chispa al pensarte .`
+},
+{
+titulo:"Página II",
+texto:`Me gustaria robarte, llearte flores solo por ser tu
+pasear contigo todo el dia 
+ver peliculas series 
+me gustaria estar contigo simplemente eso .`
+},
+{
+titulo:"Página III",
+texto:`Dice la frase un minuto con tigo son mil horas con alguien mas 
+pero un 1 segundo de verte es mas que mil vidas, cuando uno quiere 
+le basta con eso para ser feliz .`
+}
+]
+},
+
+{
+titulo:"Arte",
+subtitulo:"Solo un lugar ",
+paginas:[
+{
+titulo:"Página I",
+texto:`Tu eres tab hernosa cada cabello 
+las perlas de tus dientes 
+tu fina piel, tu melodiosa voz 
+tu eres una completa obra de arte .`
+},
+{
+titulo:"Página II",
+texto:`Tal vez eres un regalo del cielo que de verdad 
+vino a demostrar que las cosas se pueden hacer 
+y que puedes hacerlo con una sonrisa de frente 
+deberian de ponerte como una obra de arte 
+yo lo haria .`
+},
+{
+titulo:"Página III",
+texto:`Gracias por formar parte de mi pequeño universo.`
+}
+]
+},
+
+{
+titulo:"Triska mia",
+subtitulo:"Todo lo que quedó sin decir",
+paginas:[
+{
+titulo:"Página I",
+texto:`A estas alturas no cre que queden palabras que sobren pero si que faltan 
+por ejemplo que todo te queda bien 
+que tienes todo lo que un hombre quiere y estoy seguro que sabes eso 
+y que pase lo que pase voy a estar contigo en todo momento.`
+},
+{
+titulo:"Página II",
+texto:`No importa que pase siempre me encantara verte feliz 
+me entara saber en quien te conviertes y en todo lo que haras 
+me emocionare con cada mensaje 
+me pondre feiz con cada nota de voz 
+y cada foo que lleguemos a mandar .`
+},
+{
+titulo:"Página III",
+texto:`Todo eso es lo que me encanta de ti y quiero que sepas .`
+}
+]
+},
+
+{
+titulo:"21 razones",
+subtitulo:"Y podría escribir muchas más",
+paginas:[
+{
+titulo:"Página I",
+texto:`Razón 1: tu sonrisa.
+
+Razón 2: tu manera de ser.
+
+Razón 3: cómo haces sentir a las personas
+
+Razón 4: La forma en la vez las cosas.`
+},
+{
+titulo:"Página II",
+texto:`Razón 5: como me haces sentir
+
+Razón 6: Tus ojos 
+
+Razón 7:Tu voz
+Razón 8: El como ayudas a los demás 
+razón 9; El preocuparte por los tuyos
+razón 10:El como trabajas y estudias sin importas lo cansada que estes 
+razón 11:Tu pelo,nariz, labios todo es perfecto .`
+},
+{
+titulo:"Página III",
+texto:`Razón 12: Lees rápido
+       Razón 13: El como quieres aprender aunque cueste tiempo
+       Razón 14: Entiendes la vibra
+       Razón 15: Que sabes cocinar y etsoy seguro que es delicioso
+       Razón 16: Tu forma de querer
+       Razón 17: Que te gusta baiar aunque te de pena
+       Razón 18: Tu risa
+       Razón 19: Saber en que poner prioridades
+       Razón 20: Tus gustos son top
+       Razon 21: Tu humor y que siempre intentas sacar sonrisas .`
+}
+]
+},
+
+{
+titulo:"Onelove",
+subtitulo:"Ninguna pregunta",
+paginas:[
+{
+titulo:"Página I",
+texto:`Esta no es la primera vez que amo, sin embargo
+tu calidez me devuelve a mi pasado 
+y cuando pedia algo real en mi vida 
+me envolvio con tus ojos brillantes y tu arte en paredes .`
+},
+{
+titulo:"Página II",
+texto:`Te veo todo el tiempo en sueños o en una imaginación 
+se que no es real, pero imaginar que estas aqui 
+es mas calido que no pensarlo 
+creo que no sabrias explicarlo.`
+},
+{
+titulo:"Página III",
+texto:`Siento como si nunca hubiera necesitado estar con alguien mas 
+me guias en un futuro con planes indescriptibles 
+llegaste y no solo mi futuro mi presente y mi futuro
+fueron pisados ers mi presente 
+no es la primera vez que amo 
+pero se sinte como si asi fuera.`
+}
+]
+},
+
+{
+titulo:"Si supieras ",
+subtitulo:"Algunos momentos merecen quedarse",
+paginas:[
+{
+titulo:"Página I",
+texto:`No creo que sepas lo que me has echo 
+anetes de ti, las estrellas eran estrellas la lluvia 
+solo era lluvia, pero te vi sonreir y de alguna manera lo ordinario 
+se volvio inolvidable.`
+},
+{
+titulo:"Página II",
+texto:`Momentos sencillos se volvieron extraordionarios 
+ahora cada hermsoa me recuerda a ti, no por que el mundo haya cambiado si no 
+por que cambiaste mi forma de verlo.`
+},
+{
+titulo:"Página III",
+texto:`si el amor tiene una obra maestra favorita 
+creo que se olvido colgarla en un museo 
+en cambio la dejo entrar en mi vida.`
+}
+]
+},
+
+{
+titulo:"Ya casi",
+subtitulo:"Ya casi llegamos al final",
+paginas:[
+{
+titulo:"Página I",
+texto:`Si llegaste hasta aquí...
+gracias por leer todo esto.`
+},
+{
+titulo:"Página II",
+texto:`Pero falta.
+Ponme como sello sobre tu corazón 
+como huella sobre tu brazo;
+por que fuerte como la muerte es el amro 
+y sus brasas son brasas de fuego.`
+},
+{
+titulo:"Página III",
+texto:`Una llama intensa que nada puede apagar 
+ni los rios de agua podran ahogarlo 
+ni el tiempo podra hacer que se olvide.`
+}
+]
+},
+
+{
+titulo:"El libro que nunca termina",
+subtitulo:"Porque todavía quedan páginas por escribir",
+paginas:[
+{
+titulo:"Página I",
+texto:`Liz,
+
+si llegaste hasta el último libro, quiero que sepas que hice todo esto pensando en ti.`
+},
+{
+titulo:"Página II",
+texto:`Veinte libros parecen mucho...
+
+pero cuando se trata de alguien que amas,
+nunca parecen suficientes.`
+},
+{
+titulo:"Página III",
+texto:`Eres la unica luna en mi cielo 
+entre las constelaciones de estrellas eres la unica llama 
+que convierte la oscuridad 
+en un obra de luz. ❤️`
+}
+]
+}
+];
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+const audio =
+    document.getElementById("audio");
+
+const musicButton =
+    document.getElementById("musicButton");
+
+const songName =
+    document.getElementById("songName");
+
+let libroActual =
+    null;
+
+let paginaActual =
+    -1;
+
+
+/* =====================================================
+   CREAR LIBROS
+===================================================== */
+
+function crearLibros() {
+
+    const shelf =
+        document.getElementById("shelf");
+
+    const shelf2 =
+        document.getElementById("shelf2");
+
+    libros.forEach(
+        (libro,index) => {
+
+            const elemento =
+                document.createElement("article");
+
+            elemento.className =
+                "book";
+
+            elemento.innerHTML = `
+
+                <span class="book-number">
+                    ${String(index+1).padStart(2,"0")}
+                </span>
+
+                <span class="book-spine">
+                    ${libro.titulo}
+                </span>
+            `;
+
+            elemento.onclick =
+                () =>
+                seleccionarLibro(
+                    elemento,
+                    index
+                );
+
+            if(index < 10) {
+
+                shelf.appendChild(
+                    elemento
+                );
+
+            } else {
+
+                shelf2.appendChild(
+                    elemento
+                );
+            }
+
+        }
+    );
+}
+
+
+/* =====================================================
+   ENTRADA
+===================================================== */
+
+function enterLibrary() {
+
+    document
+        .getElementById("intro")
+        .classList.add("hidden");
+
+    reproducirMusica(
+        canciones.bienvenida,
+        "Biblioteca"
+    );
+}
+
+
+/* =====================================================
+   ANIMACIÓN DEL LIBRO
+===================================================== */
+
+function seleccionarLibro(
+    elemento,
+    index
+) {
+
+    /*
+       Evitamos que pueda abrir varios libros
+       mientras uno está animándose.
+    */
+
+    if(
+        document.querySelector(
+            ".book.book-selected"
+        )
+    ) {
+
+        return;
+    }
+
+    const estante =
+        elemento.closest(".shelf");
+
+    estante.classList.add(
+        "animating"
+    );
+
+    elemento.classList.add(
+        "book-selected"
+    );
+
+
+    /*
+       Esperamos a que termine
+       la animación del libro.
+    */
+
+    setTimeout(
+        () => {
+
+            estante.classList.remove(
+                "animating"
+            );
+
+            elemento.classList.remove(
+                "book-selected"
+            );
+
+            abrirLibro(index);
+
+        },
+        1250
+    );
+}
+
+
+/* =====================================================
+   MÚSICA
+===================================================== */
+
+function reproducirMusica(
+    url,
+    nombre
+) {
+
+    if(
+        !url ||
+        url.startsWith(
+            "PEGA_AQUI"
+        )
+    ) {
+
+        audio.pause();
+
+        audio.removeAttribute(
+            "src"
+        );
+
+        musicButton.textContent =
+            "▶";
+
+        songName.textContent =
+            "Añade una canción";
+
+        return;
+    }
+
+    audio.pause();
+
+    audio.currentTime =
+        0;
+
+    audio.src =
+        url;
+
+    audio.volume =
+        0.35;
+
+    songName.textContent =
+        nombre;
+
+    audio.play()
+        .then(
+            () => {
+
+                musicButton.textContent =
+                    "⏸";
+
+            }
+        )
+        .catch(
+            () => {
+
+                musicButton.textContent =
+                    "▶";
+
+            }
+        );
+}
+
+
+function toggleMusic() {
+
+    if(
+        !audio.src
+    ) {
+
+        return;
+    }
+
+    if(
+        audio.paused
+    ) {
+
+        audio.play();
+
+        musicButton.textContent =
+            "⏸";
+
+    } else {
+
+        audio.pause();
+
+        musicButton.textContent =
+            "▶";
+    }
+}
+
+
+function changeVolume(
+    valor
+) {
+
+    audio.volume =
+        valor;
+}
+
+
+/* =====================================================
+   ABRIR LIBRO
+===================================================== */
+
+function abrirLibro(
+    index
+) {
+
+    libroActual =
+        index;
+
+    paginaActual =
+        -1;
+
+    const libro =
+        libros[index];
+
+    const numero =
+        String(index + 1)
+        .padStart(2,"0");
+
+    reproducirMusica(
+        canciones[
+            "libro" + numero
+        ],
+        libro.titulo
+    );
+
+    document
+        .getElementById("reader")
+        .classList.add(
+            "active"
+        );
+
+    mostrarPagina();
+}
+
+
+/* =====================================================
+   MOSTRAR PÁGINA
+===================================================== */
+
+function mostrarPagina() {
+
+    const libro =
+        libros[
+            libroActual
+        ];
+
+    const contenido =
+        document.getElementById(
+            "bookContent"
+        );
+
+
+    /* PORTADA */
+
+    if(
+        paginaActual === -1
+    ) {
+
+        const numero =
+            String(
+                libroActual + 1
+            ).padStart(
+                2,
+                "0"
+            );
+
+        const imagen =
+            portadas[
+                "libro" + numero
+            ];
+
+
+        contenido.innerHTML = `
+
+            <div
+                class="cover"
+                style="
+                    background-image:
+                    linear-gradient(
+                        rgba(0,0,0,.3),
+                        rgba(0,0,0,.7)
+                    ),
+                    url('${imagen}');
+                "
+            >
+
+                <div
+                    class="cover-content"
+                >
+
+                    <h2>
+                        ${libro.titulo}
+                    </h2>
+
+                    <p>
+                        ${libro.subtitulo}
+                    </p>
+
+                    <button
+                        class="open-book-button"
+                        onclick="siguientePagina()"
+                    >
+                        Abrir libro →
+                    </button>
+
+                </div>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    /* PÁGINA */
+
+    const pagina =
+        libro.paginas[
+            paginaActual
+        ];
+
+    contenido.innerHTML = `
+
+        <div
+            class="page"
+        >
+
+            <h3>
+                ${pagina.titulo}
+            </h3>
+
+            <div
+                class="page-text"
+            >
+                ${pagina.texto}
+            </div>
+
+            <div
+                class="page-number"
+            >
+                ${paginaActual + 1} / 3
+            </div>
+
+            <div
+                class="page-controls"
+            >
+
+                <button
+                    onclick="paginaAnterior()"
+                    ${
+                        paginaActual === 0
+                        ? "disabled"
+                        : ""
+                    }
+                >
+                    ← Anterior
+                </button>
+
+                <button
+                    onclick="siguientePagina()"
+                >
+
+                    ${
+                        paginaActual === 2
+                        ? "Cerrar libro"
+                        : "Siguiente →"
+                    }
+
+                </button>
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+/* =====================================================
+   SIGUIENTE
+===================================================== */
+
+function siguientePagina() {
+
+    if(
+        paginaActual < 2
+    ) {
+
+        paginaActual++;
+
+        mostrarPagina();
+
+    } else {
+
+        cerrarLibro();
+    }
+}
+
+
+/* =====================================================
+   ANTERIOR
+===================================================== */
+
+function paginaAnterior() {
+
+    if(
+        paginaActual > 0
+    ) {
+
+        paginaActual--;
+
+        mostrarPagina();
+
+    } else {
+
+        paginaActual = -1;
+
+        mostrarPagina();
+    }
+}
+
+
+/* =====================================================
+   CERRAR
+===================================================== */
+
+function cerrarLibro() {
+
+    document
+        .getElementById("reader")
+        .classList.remove(
+            "active"
+        );
+
+    libroActual =
+        null;
+
+    paginaActual =
+        -1;
+
+    reproducirMusica(
+        canciones.bienvenida,
+        "Biblioteca"
+    );
+}
+
+
+/* =====================================================
+   ESC
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if(
+            event.key === "Escape" &&
+            libroActual !== null
+        ) {
+
+            cerrarLibro();
+        }
+    }
+);
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+crearLibros();
+
+</script>
+
+</body>
+</html>
+```
